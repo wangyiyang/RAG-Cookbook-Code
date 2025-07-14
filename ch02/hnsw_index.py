@@ -407,3 +407,43 @@ if __name__ == "__main__":
     print(f"  构建时间: {benchmark_results['build_time']:.2f}秒")
     print(f"  平均搜索时间: {benchmark_results['avg_search_time_ms']:.2f}毫秒")
     print(f"  总向量数: {benchmark_results['total_vectors']}")
+
+
+# HNSW索引演示
+# 插入 1000 个向量...
+# 已插入 100 个向量
+# 已插入 200 个向量
+# 已插入 300 个向量
+# 已插入 400 个向量
+# 已插入 500 个向量
+# 已插入 600 个向量
+# 已插入 700 个向量
+# 已插入 800 个向量
+# 已插入 900 个向量
+# 已插入 1000 个向量
+
+# 执行搜索测试...
+# 查询结果 (Top-5):
+#   1. 节点 468, 距离: 3.9181
+#   2. 节点 771, 距离: 4.0434
+#   3. 节点 12, 距离: 4.0455
+#   4. 节点 475, 距离: 4.0498
+#   5. 节点 284, 距离: 4.0645
+
+# 索引统计信息:
+#   total_nodes: 1000
+#   total_levels: 11
+#   entry_point: 144
+#   dimension: 128
+#   max_m: 16
+#   ef_construction: 200
+#   level_sizes: {'level_0': 1000, 'level_1': 488, 'level_2': 242, 'level_3': 114, 'level_4': 63, 'level_5': 35, 'level_6': 21, 'level_7': 8, 'level_8': 3, 'level_9': 1, 'level_10': 1}
+#   avg_connections: 34.835
+
+# 执行性能基准测试...
+# 构建HNSW索引...
+# 执行搜索测试...
+# 基准测试结果:
+#   构建时间: 2.56秒
+#   平均搜索时间: 4.50毫秒
+#   总向量数: 500

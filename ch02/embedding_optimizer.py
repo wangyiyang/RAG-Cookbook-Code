@@ -292,3 +292,70 @@ if __name__ == "__main__":
     # 缓存统计
     cache_stats = embedding_model.get_cache_stats()
     print(f"缓存统计: {cache_stats}")
+
+# /usr/local/lib/python3.11/dist-packages/huggingface_hub/utils/_auth.py:94: UserWarning: 
+# The secret `HF_TOKEN` does not exist in your Colab secrets.
+# To authenticate with the Hugging Face Hub, create a token in your settings tab (https://huggingface.co/settings/tokens), set it as secret in your Google Colab and restart your session.
+# You will be able to reuse this secret in all of your notebooks.
+# Please note that authentication is recommended but still optional to access public models or datasets.
+#   warnings.warn(
+# modules.json: 100%
+#  349/349 [00:00<00:00, 15.2kB/s]
+# config_sentence_transformers.json: 100%
+#  116/116 [00:00<00:00, 8.80kB/s]
+# README.md: 
+#  10.5k/? [00:00<00:00, 1.05MB/s]
+# sentence_bert_config.json: 100%
+#  53.0/53.0 [00:00<00:00, 5.95kB/s]
+# config.json: 100%
+#  612/612 [00:00<00:00, 52.4kB/s]
+# model.safetensors: 100%
+#  90.9M/90.9M [00:01<00:00, 70.4MB/s]
+# tokenizer_config.json: 100%
+#  350/350 [00:00<00:00, 35.7kB/s]
+# vocab.txt: 
+#  232k/? [00:00<00:00, 14.9MB/s]
+# tokenizer.json: 
+#  466k/? [00:00<00:00, 26.3MB/s]
+# special_tokens_map.json: 100%
+#  112/112 [00:00<00:00, 9.74kB/s]
+# config.json: 100%
+#  190/190 [00:00<00:00, 16.4kB/s]
+# Batches: 100%
+#  1/1 [00:00<00:00,  1.39it/s]
+# 生成嵌入向量: (5, 384)
+# Batches: 100%
+#  1/1 [00:00<00:00, 20.18it/s]
+# Batches: 100%
+#  1/1 [00:00<00:00, 35.70it/s]
+# Batches: 100%
+#  1/1 [00:00<00:00, 44.67it/s]
+# Batches: 100%
+#  1/1 [00:00<00:00, 40.21it/s]
+# Batches: 100%
+#  1/1 [00:00<00:00, 44.77it/s]
+# Batches: 100%
+#  1/1 [00:00<00:00, 36.03it/s]
+# Batches: 100%
+#  1/1 [00:00<00:00, 39.95it/s]
+
+# === 嵌入质量评估报告 ===
+
+# 语义准确性:
+# - 相关概念相似度: 0.467 (期望 > 0.7)
+# - 无关概念区分度: 0.192 (期望 > 0.7)
+
+# 技术指标:
+# - 向量维度: 384
+# - 向量长度均值: 1.000
+# - 向量长度标准差: 0.000
+
+# 综合评估:
+# - 整体质量分数: 0.665
+# - 质量等级: D级不合格
+
+# 建议:
+# - 相关概念相似度偏低，建议更换更适合的嵌入模型
+# - 无关概念区分度不足，模型可能存在过拟合问题
+
+# 缓存统计: {'cache_size': 12, 'model_name': 'sentence-transformers/all-MiniLM-L6-v2', 'total_cached_vectors': 12}
