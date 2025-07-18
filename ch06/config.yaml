@@ -1,0 +1,304 @@
+# 法律文档智能检索系统配置文件
+
+# 系统基本配置
+system:
+  name: "法律文档智能检索系统"
+  version: "1.0.0"
+  environment: "development"  # development, staging, production
+  debug: true
+  log_level: "INFO"
+
+# 数据库配置
+database:
+  # PostgreSQL 关系数据库
+  postgresql:
+    host: "localhost"
+    port: 5432
+    database: "legal_db"
+    username: "legal_user"
+    password: "legal_pass"
+    pool_size: 10
+    max_overflow: 20
+    pool_timeout: 30
+    
+  # Neo4j 图数据库
+  neo4j:
+    uri: "bolt://localhost:7687"
+    username: "neo4j"
+    password: "neo4j_pass"
+    database: "legal_graph"
+    max_connections: 50
+    
+  # Elasticsearch 搜索引擎
+  elasticsearch:
+    hosts: ["http://localhost:9200"]
+    index_prefix: "legal_"
+    timeout: 30
+    max_retries: 3
+    
+# 向量检索配置
+vector_search:
+  # 嵌入模型
+  embedding_model: "text-embedding-ada-002"
+  embedding_dimension: 1536
+  
+  # FAISS 配置
+  faiss:
+    index_type: "IVF"
+    nlist: 1024
+    nprobe: 10
+    
+  # ChromaDB 配置
+  chromadb:
+    host: "localhost"
+    port: 8000
+    collection_name: "legal_documents"
+    
+# 模型配置
+models:
+  # 实体识别模型
+  ner_model:
+    name: "legal_ner_model"
+    path: "./models/legal_ner_model.bin"
+    batch_size: 16
+    max_length: 512
+    
+  # 文本分类模型
+  classification_model:
+    name: "legal_classifier"
+    path: "./models/legal_classifier.bin"
+    confidence_threshold: 0.8
+    
+  # 语言模型
+  language_model:
+    name: "legal_llm"
+    api_key: "${OPENAI_API_KEY}"
+    model_name: "gpt-4"
+    max_tokens: 2000
+    temperature: 0.1
+    
+# 文档处理配置
+document_processing:
+  # 支持的文件类型
+  supported_formats: ["pdf", "docx", "txt", "html"]
+  
+  # 分块配置
+  chunking:
+    chunk_size: 1000
+    chunk_overlap: 200
+    separator: "\n\n"
+    
+  # 实体识别配置
+  entity_recognition:
+    confidence_threshold: 0.7
+    max_entities_per_chunk: 50
+    
+  # 预处理配置
+  preprocessing:
+    remove_headers: true
+    remove_footers: true
+    normalize_whitespace: true
+    
+# 检索配置
+retrieval:
+  # 检索策略
+  strategy: "hybrid"  # semantic, keyword, hybrid
+  
+  # 检索参数
+  top_k: 20
+  semantic_weight: 0.7
+  keyword_weight: 0.3
+  
+  # 重排序
+  reranking:
+    enabled: true
+    model: "cross-encoder/ms-marco-MiniLM-L-12-v2"
+    top_k: 10
+    
+  # 缓存配置
+  cache:
+    enabled: true
+    ttl: 3600  # 1小时
+    max_size: 10000
+    
+# 质量控制配置
+quality_control:
+  # 验证阈值
+  validation_thresholds:
+    min_confidence: 0.8
+    min_relevance: 0.7
+    min_completeness: 0.6
+    max_risk_level: 0.3
+    
+  # 质量检查
+  quality_checks:
+    fact_accuracy: true
+    citation_correctness: true
+    logic_consistency: true
+    applicability: true
+    completeness: true
+    
+  # 风险评估
+  risk_assessment:
+    enabled: true
+    alert_on_high_risk: true
+    require_human_review: true
+    
+# 监控配置
+monitoring:
+  # 性能监控
+  performance:
+    response_time_threshold: 5.0  # 秒
+    throughput_threshold: 100     # 请求/小时
+    error_rate_threshold: 0.05    # 5%
+    
+  # 质量监控
+  quality:
+    accuracy_threshold: 0.85
+    relevance_threshold: 0.80
+    completeness_threshold: 0.75
+    
+  # 业务监控
+  business:
+    satisfaction_threshold: 4.0
+    conversion_rate_threshold: 0.30
+    
+  # 告警配置
+  alerts:
+    enabled: true
+    channels: ["email", "slack"]
+    email_recipients: ["admin@example.com"]
+    slack_webhook: "${SLACK_WEBHOOK_URL}"
+    
+# 安全配置
+security:
+  # 认证
+  authentication:
+    enabled: true
+    method: "jwt"  # jwt, oauth2, basic
+    secret_key: "${JWT_SECRET_KEY}"
+    token_expiry: 3600
+    
+  # 授权
+  authorization:
+    enabled: true
+    rbac: true
+    
+  # 数据加密
+  encryption:
+    enabled: true
+    algorithm: "AES-256-GCM"
+    key: "${ENCRYPTION_KEY}"
+    
+  # 审计日志
+  audit_logging:
+    enabled: true
+    log_all_queries: true
+    log_sensitive_data: false
+    
+# API配置
+api:
+  # 服务器配置
+  server:
+    host: "0.0.0.0"
+    port: 8000
+    workers: 4
+    
+  # 限流配置
+  rate_limiting:
+    enabled: true
+    requests_per_minute: 60
+    burst_size: 10
+    
+  # 跨域配置
+  cors:
+    enabled: true
+    allow_origins: ["*"]
+    allow_methods: ["GET", "POST", "PUT", "DELETE"]
+    allow_headers: ["*"]
+    
+# 功能开关
+features:
+  # 实验性功能
+  experimental:
+    knowledge_graph_reasoning: true
+    multi_modal_search: false
+    real_time_updates: false
+    
+  # 高级功能
+  advanced:
+    citation_network_analysis: true
+    quality_validation: true
+    performance_monitoring: true
+    
+# 外部服务配置
+external_services:
+  # 法律数据源
+  legal_data_sources:
+    - name: "国家法律法规数据库"
+      url: "https://api.legal.gov.cn"
+      api_key: "${LEGAL_GOV_API_KEY}"
+      
+    - name: "最高人民法院数据库"
+      url: "https://api.court.gov.cn"
+      api_key: "${COURT_API_KEY}"
+      
+  # 第三方服务
+  third_party:
+    # 通知服务
+    notification:
+      email:
+        smtp_server: "smtp.gmail.com"
+        smtp_port: 587
+        username: "${EMAIL_USERNAME}"
+        password: "${EMAIL_PASSWORD}"
+        
+    # 短信服务
+    sms:
+      provider: "aliyun"
+      access_key: "${SMS_ACCESS_KEY}"
+      secret_key: "${SMS_SECRET_KEY}"
+      
+# 部署配置
+deployment:
+  # 容器化配置
+  docker:
+    image_name: "legal-rag-system"
+    tag: "latest"
+    
+  # Kubernetes配置
+  kubernetes:
+    namespace: "legal-system"
+    replicas: 3
+    
+  # 负载均衡
+  load_balancer:
+    enabled: true
+    algorithm: "round_robin"
+    health_check_interval: 30
+    
+# 备份配置
+backup:
+  # 数据备份
+  data_backup:
+    enabled: true
+    schedule: "0 2 * * *"  # 每天凌晨2点
+    retention_days: 30
+    
+  # 配置备份
+  config_backup:
+    enabled: true
+    schedule: "0 1 * * 0"  # 每周日凌晨1点
+    
+# 开发配置
+development:
+  # 测试配置
+  testing:
+    test_data_path: "./tests/data"
+    mock_external_services: true
+    
+  # 调试配置
+  debug:
+    enable_profiling: true
+    log_sql_queries: true
+    verbose_logging: true
