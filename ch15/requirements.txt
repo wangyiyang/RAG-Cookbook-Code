@@ -1,0 +1,6 @@
+numpy>=1.21.0
+networkx>=2.6.0
+scikit-learn>=1.0.0
+dataclasses>=0.8; python_version < "3.7"
+typing-extensions>=3.7.4; python_version < "3.8"
+sentence-transformers>=2.2.0
